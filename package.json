@@ -1,0 +1,17 @@
+{
+  "name": "chatbot-echo-facebook",
+  "version": "1.0.0",
+  "description": "Chatbot template for facebook",
+  "main": "echoback_bot.js",
+  "scripts": {
+    "start": "node ./echoback_bot.js"
+  },
+  "author": "Maho Takara",
+  "license": "MIT",
+  "dependencies": {
+    "facebook-bot-messenger": "^1.0.4",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "https": "^1.0.0"
+  }
+}
