@@ -3,7 +3,7 @@
 Bluemix の CFアプリ または Bluemix IaaS で動作するFacebook チャットボットのテンプレートです。
 このアプリは、受けたメッセージをそのまま返すオウム返しのアプリで、Watson Conversation などを接続するなど、発展させていく事ができます。
 
-## Bluemix で動作させる場合
+## Bluemix CFアプリとして動作させる場合
 
 ### Facebookの基本情報設定
 credentials.json.sample からserverの項目を削除してcredentials.jsonとして保存します。参考資料(1)を参考にして、Facebook から下記の項目をセットします。
