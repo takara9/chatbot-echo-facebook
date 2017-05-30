@@ -15,7 +15,7 @@ const https = require('https');
 const http = require('http');
 var server = null;
 
-if ( credentials.server.key ) { 
+if ( credentials.server ) { 
     // for Virtual Server
     server = https.createServer({
 	key: fs.readFileSync(credentials.server.key),

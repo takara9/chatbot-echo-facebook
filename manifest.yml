@@ -4,5 +4,5 @@ applications:
   instances: 1
   domain: mybluemix.net
   name: facebook-chatbot
-  host: facebook-chatbot
+  host: facebook-chatbot-tkr
   disk_quota: 1024M
