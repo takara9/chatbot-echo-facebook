@@ -1,12 +1,19 @@
 # Facebook チャットボット テンプレート
 
 Bluemix の CFアプリ または Bluemix IaaS で動作するFacebook チャットボットのテンプレートです。
-このアプリは、受けたメッセージをそのまま返すオウム返しのアプリで、Watson Conversation などを接続するなど、発展させていく事ができます。
+このアプリは、受けたメッセージをそのまま返すオウム返しのアプリで、Watson Conversation のアプリの土台とする事ができます。
 
 ## Bluemix CFアプリとして動作させる場合
 
+* パソコンなど作業用の環境で以下のコマンドでファイルをダウンロードします。
+
+~~~
+git clone https://github.com/takara9/chatbot-echo-facebook
+~~~
+
+
 ### Facebookの基本情報設定
-credentials.json.sample からserverの項目を削除してcredentials.jsonとして保存します。参考資料(1)を参考にして、Facebook から下記の項目をセットします。
+* credentials.json.sample からserverの項目を削除してcredentials.jsonとして保存します。参考資料(1)を参考にして、Facebook から下記の項目をセットします。
 
 ~~~
 {
@@ -19,12 +26,14 @@ credentials.json.sample からserverの項目を削除してcredentials.jsonと�
 ~~~~
 
 ### Bluemix へのデプロイ
-Bluemix CLI をインストールします。参考情報(2)
-Bluemix CLI でログインして、下記のコマンドでCFアプリとしてデプロイします。 このコマンドは、manifest.ymlを読み取って実行します。 このファイルのhostが既に使われている場合、デプロイが失敗しますから、変更して再実行します。
+* Bluemix CLI をインストールします。参考情報(2)
+* Bluemix CLI でログインして、下記のコマンドでCFアプリとしてデプロイします。 このコマンドは、manifest.ymlを読み取って実行します。 このファイルのhostが既に使われている場合、デプロイが失敗しますから、変更して再実行します。
 
 ~~~
 bx cf push
 ~~~
+
+* Webhooks を設定します。 こちらも参考資料(1)を参考にします。
 
 
 ## Bluemix Infrastructure 仮想サーバーで実行する場合
@@ -48,13 +57,13 @@ bx cf push
     }
 }
 ~~~
-
-* Webhooks を設定します。 こちらも参考資料(1)を参考にします。
 * 設定が完了したら、次のコマンドでアプリをスタートします。
 
 ~~~
 npm start
 ~~~
+* Webhooks を設定します。 こちらも参考資料(1)を参考にします。
+
 
 
 ## 参考資料
