@@ -58,12 +58,12 @@ npm start
 
 
 ## 参考資料
-(1) ジャスト30分！FBメッセンジャーbotをとりあえず作ってみる手順まとめ https://bita.jp/dml/facebookbot_exp
-(2) Bluemix CLIホーム https://clis.ng.bluemix.net/ui/home.html
-(3) CHANGE MAKERS 1.2 仮想サーバーを起動するには？ https://www.change-makers.jp/docs/softlayer-config-guide/10292
-(4) 私的MyDNS.JP https://www.mydns.jp/
-(5) Let's Encrypt 総合ポータル https://letsencrypt.jp/
-(6) npm facebook-bot-messenger https://www.npmjs.com/package/facebook-bot-messenger
+- (1) ジャスト30分！FBメッセンジャーbotをとりあえず作ってみる手順まとめ https://bita.jp/dml/facebookbot_exp
+- (2) Bluemix CLIホーム https://clis.ng.bluemix.net/ui/home.html
+- (3) CHANGE MAKERS 1.2 仮想サーバーを起動するには？ https://www.change-makers.jp/docs/softlayer-config-guide/10292
+- (4) 私的MyDNS.JP https://www.mydns.jp/
+- (5) Let's Encrypt 総合ポータル https://letsencrypt.jp/
+- (6) npm facebook-bot-messenger https://www.npmjs.com/package/facebook-bot-messenger
 
 
 
