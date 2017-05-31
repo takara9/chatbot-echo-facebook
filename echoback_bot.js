@@ -15,11 +15,11 @@ const https = require('https');
 const http = require('http');
 var server = null;
 
-if ( credentials.server ) { 
+if ( credentials.https ) { 
     // for Virtual Server
     server = https.createServer({
-	key: fs.readFileSync(credentials.server.key),
-	cert: fs.readFileSync(credentials.server.cert)
+	key: fs.readFileSync(credentials.https.key),
+	cert: fs.readFileSync(credentials.https.cert)
     });
 } else {
     // for Bluemix CF runtime

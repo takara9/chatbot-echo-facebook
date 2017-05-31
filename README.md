@@ -51,7 +51,7 @@ bx cf push
     "appSecret": "facebook applicaiton secret",
     "validationToken": "facebook validation token",
     "pageToken": "facebook page token",
-    "server": {
+    "https": {
         "key":  "lets_encript.key",
         "cert": "lets_encript_fullchain.crt"
     }
