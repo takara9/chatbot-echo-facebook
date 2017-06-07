@@ -2,9 +2,9 @@
   "name": "chatbot-echo-facebook",
   "version": "1.0.0",
   "description": "Chatbot template for facebook",
-  "main": "echoback_bot.js",
+  "main": "chatman.js",
   "scripts": {
-    "start": "node ./echoback_bot.js"
+    "start": "node ./chatman.js"
   },
   "author": "Maho Takara",
   "license": "MIT",
