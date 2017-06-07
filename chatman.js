@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 //
 // Facebook メッセンジャー のエコーバック ボット
-//
+//   セッション管理機能実装済み
 // Facebook Message API Library
 //  https://www.npmjs.com/package/facebook-bot-messenger
 //
@@ -30,9 +30,9 @@ if ( credentials.https ) {
 var bot = MessengerPlatform.create(credentials, server);
 //　コールバック
 bot.webhook('/webhook');
-
 // セッション管理
 var sc = require("./sessionCtrl.js");
+
 
 // メッセージ到着
 bot.on(MessengerPlatform.Events.MESSAGE, function(userId, message) {
@@ -45,51 +45,52 @@ bot.on(MessengerPlatform.Events.MESSAGE, function(userId, message) {
     agent = "facebook";
     sc.sessionCtrl( agent, userId, message, function(err, session) {
         if (err) {
-            errorHandler(agent,message, "内部エラー", err);
+            errorHandler(agent, userId, message, "内部エラー", err);
         } else {
-            eventHandler(message, session, function(err,session) {
+            eventHandler(session, message, function(err,session) {
                 sc.sessionUpdate(session, function(err,session) {});
             });
         }
     });
-
-    // エコー応答
-
 });
 
 
-// イベント処理 共通                                                                                                          
-function eventHandler(message, session, callback) {
+// イベント処理 共通
+function eventHandler(session, message, callback) {
     if (session.agent == "LINE") {
-        //_eventHandlerLine( message, session, function(err,session) {
-        //    callback(err,session);
-        //});
-	callback(err,session);
+	_eventHandlerLINE(session,message,function(err,session) {
+	    callback(err,session);
+	});
     } else if (session.agent == "facebook") {
-        _eventHandlerFB( message, session, function(err,session) {
+        _eventHandlerFB(session,message,function(err,session) {
             callback(err,session);
 	});
     }
 }
 
-// エラー処理 共通
-function errorHandler(agent, message, errorMessage, err) {
-    console.log("errorHandler message = ", errorMessage, err.message);
-    if (agent == "LINE") {
-        bot.replyMessage(message.events[0].replyToken, errorMessage);
-    } else if (session.agent == "facebook") {
-	bot.sendTextMessage(userId, errorMessage);
-    }
+// Facebookイベント処理
+function _eventHandlerFB( session, message, callback) {
+    session.recvMsg = message.getText();
+    session.replyMsg = session.recvMsg;
+    bot.sendTextMessage(session.user_id, session.replyMsg);
+    callback(null, session);
 }
 
-
-
-// Facebookイベント処理
-function _eventHandlerFB( message, session, callback) {
-    bot.sendTextMessage(userId,message.getText());
+// LINEイベント処理
+function _eventHandlerLINE( session,message, callback) {
+    // DUMMY
     callback(null, session);
-});
+}
 
+// エラー処理 共通
+function errorHandler(agent, userId, message, errorMessage, err) {
+    console.log("エラー処理 ");
+    if (agent == "LINE") {
+	// DUMMY
+    } else if (session.agent == "facebook") {
+	bot.sendTextMessage( userId, errorMessage);
+    }
+}
 
 
 // Bluemix で稼働する場合はポート番号を取得

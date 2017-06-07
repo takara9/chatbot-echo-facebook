@@ -94,46 +94,29 @@ exports.sessionCtrl = function(agent, userId, message, callback) {
 }
 
 
-// イベント処理の呼び出し
-function _sessionCtrl(session, message, callback) {
-    
-    session.count = session.count + 1;
-    session.last_time = new Date().toLocaleString();
-    sessionUpdate(session, function(err,session) {
-	callback(err,session);
-    });
-
-}
-
-
 // 新規セッションの作成
 function sessionOpen(agent, userId, message, callback) {
-
-    var date;
-    var reply;
-
     console.log("セッション OPEN");
-
+    var date = new Date()
+    var strTime = date.toLocaleString();
+    var replyTo = null;
     if (agent == "LINE"){
-	date = new Date(message.events[0].timestamp);
-	reply = message.events[0].replyToken
-    } else {
-	date = new Date(message.getTime());
-	reply = message.getSenderId();
+        replyTo = message.events[0].replyToken
+    } else if (agent == "facebook") {
+        replyTo = message.getSenderId();
     }
-    var time = date.toLocaleString();
 
     // セッションDOC 作成
     var doc = {
 	session_id: uuid.v4(),
 	user_id: userId,
 	agent: agent,
+	reply: replyTo,
 	profile: {},
 	context: {},
 	count: 0,
-	reply_id: reply,
-	start_time: time,
-	last_time: time,
+	start_time: strTime,
+	last_time: strTime,
 	start_unixTime: date.getTime(),
 	last_unixTime: date.getTime()
     };
@@ -152,6 +135,7 @@ function sessionUpdate(session, callback) {
     console.log("セッション UPDATE");
     date = new Date();
     session.last_unixTime = date.getTime();
+    session.count++;
     dbSession.insert(session,session.user_id, function(err, res) {
 	callback(err,session);
     });

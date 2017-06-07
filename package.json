@@ -9,6 +9,8 @@
   "author": "Maho Takara",
   "license": "MIT",
   "dependencies": {
+    "cfenv": "^1.0.4",
+    "cloudant": "^1.8.0",
     "facebook-bot-messenger": "^1.0.4",
     "fs": "0.0.1-security",
     "http": "0.0.0",
