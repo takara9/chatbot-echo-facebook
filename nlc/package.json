@@ -1,0 +1,17 @@
+{
+  "name": "nlc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nlc_create.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cfenv": "^1.0.4",
+    "cloudant": "^1.8.0",
+    "uuid": "^3.0.1",
+    "watson-developer-cloud": "^2.32.1"
+  }
+}

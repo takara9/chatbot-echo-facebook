@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 //
-// Facebook メッセンジャー のエコーバック ボット
-//   セッション管理機能実装済み
-// Facebook Message API Library
-//  https://www.npmjs.com/package/facebook-bot-messenger
+//  Sample code
+//    Author: Maho Takara
 //
 
 var MessengerPlatform = require('facebook-bot-messenger');
-var credentials = require('./credentials.json');
+var cnf = require('./credentials.json');
 
 // HTTPサーバー開設
 const fs = require('fs');
@@ -15,11 +13,11 @@ const https = require('https');
 const http = require('http');
 var server = null;
 
-if ( credentials.https ) { 
+if ( cnf.https ) { 
     // for Virtual Server
     server = https.createServer({
-	key: fs.readFileSync(credentials.https.key),
-	cert: fs.readFileSync(credentials.https.cert)
+	key: fs.readFileSync(cnf.https.key),
+	cert: fs.readFileSync(cnf.https.cert)
     });
 } else {
     // for Bluemix CF runtime
@@ -27,11 +25,13 @@ if ( credentials.https ) {
 }
 
 // メッセージ
-var bot = MessengerPlatform.create(credentials, server);
-//　コールバック
-bot.webhook('/webhook');
-// セッション管理
-var sc = require("./sessionCtrl.js");
+var bot = MessengerPlatform.create(cnf, server);
+bot.webhook('/webhook');  //　コールバック
+
+
+var sc = require("./sessionCtrl.js");  // セッション管理
+var wn = require("./watsonAPI.js");    // Watson API
+
 
 
 // メッセージ到着
@@ -70,10 +70,16 @@ function eventHandler(session, message, callback) {
 
 // Facebookイベント処理
 function _eventHandlerFB( session, message, callback) {
-    session.recvMsg = message.getText();
-    session.replyMsg = session.recvMsg;
-    bot.sendTextMessage(session.user_id, session.replyMsg);
-    callback(null, session);
+    session.inputMsg = message.getText();
+    //session.replyMsg = session.recvMsg;
+    //bot.sendTextMessage(session.user_id, session.replyMsg);
+    // Watson API をコールして応答を返す
+    wn.messageReply(session, function (err,session) {
+        //bot.replyMessage(message.events[0].replyToken, session.outputMsg);
+	bot.sendTextMessage(session.user_id, session.outputMsg);
+        callback(err, session);
+    });
+    //callback(null, session);
 }
 
 // LINEイベント処理

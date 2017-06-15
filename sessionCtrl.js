@@ -2,34 +2,17 @@
 //  SessionCtrl
 //    Author: Maho Takara
 //
-
-
-// ローカルVCAP設定と資格情報の読込み
-const cfenv = require("cfenv");
-var vcapLocal;
-try {
-    vcapLocal = require("./vcap-local.json");
-    console.log("Loaded local VCAP", vcapLocal);
-} catch (err) {
-    console.log(err.message);
-}
-const appEnvOpts = vcapLocal ? { vcap: vcapLocal} : {}
-const appEnv = cfenv.getAppEnv(appEnvOpts);
-
-
-// クラウダントへの接続とDB作成
 var uuid = require('uuid');
-var dbSession;
-if (appEnv.services['cloudantNoSQLDB']) {
-    var Cloudant = require('cloudant');
-    var cloudant = Cloudant(appEnv.services['cloudantNoSQLDB'][0].credentials);
-    var dbName = 'session';
-    cloudant.db.create(dbName, function(err, data) {
-	if(!err) 
-	    console.log("Created database: " + dbName);
-    });
-    dbSession = cloudant.db.use(dbName);    
-}
+const cloudant = require("./sharedlib_cloudant.js");
+
+var dbName = 'session';
+cloudant.db.create(dbName, function(err, data) {
+    if(!err) 
+	console.log("Created database: " + dbName);
+});
+dbSession = cloudant.db.use(dbName);    
+
+
 
 // 放置されたセッションを削除する
 const SessionTimeOut  = 60*60*48; // 2 days

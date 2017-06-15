@@ -6,3 +6,6 @@ applications:
   name: facebook-chatbot
   host: facebook-chatbot-tkr
   disk_quota: 1024M
+services:
+- Cloudant NoSQL DB-f1
+- Natural Language Classifier-mr
