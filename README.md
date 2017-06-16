@@ -1,7 +1,10 @@
-# Facebook チャットボット テンプレート
+# Facebook チャットボット Watson NLC 版
 
-Bluemix の CFアプリ または Bluemix IaaS で動作するFacebook チャットボットのテンプレートです。
-このアプリは、受けたメッセージをそのまま返すオウム返しのアプリで、Watson Conversation のアプリの土台とする事ができます。
+Bluemix の CFアプリ または Bluemix IaaS で動作するFacebook チャットボットです。 Watson NLC を利用して受信メッセージをクラス分類して、適切なメッセージを返す振る舞いをします。
+
+Bluemix の Watson NLC と Cloudant のサービスと接続する方法は、Qiitの[Watson チャットボットの作り方 第３回目](http://qiita.com/MahoTakara/private/28dee5ed8d4e02e5ab04)を参照ねがいます。また、NLCのトレーニングデータと応答用のデータ、及び、ツールは https://github.com/takara9/chatbot-corpus にあります。
+
+
 
 ## Bluemix CFアプリとして動作させる場合
 
